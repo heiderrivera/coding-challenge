@@ -1,0 +1,46 @@
+version: '3.7'
+services:
+      
+  mongodb-checkout:
+    image: mongo:4.0.19-xenial
+    networks:
+      - private-network
+
+  mongodb-bill:
+    image: mongo:4.0.19-xenial
+    networks:
+      - private-network
+
+  mongodb-logistic:
+    image: mongo:4.0.19-xenial
+    networks:
+      - private-network
+
+  bill-service:
+    image: bill-service:0.0.1
+    depends_on:
+      - mongodb-bill
+    networks:
+      - private-network
+      
+  logistic-service:
+    image: logistic-service:0.0.1
+    depends_on:
+      - mongodb-logistic
+    networks:
+      - private-network
+      
+  checkout-service:
+    image: checkout-service:0.0.1
+    ports:
+      - 8081:8081
+    depends_on:
+      - mongodb-checkout
+    networks:
+      - private-network
+      - public-network
+
+networks:
+  private-network:
+    internal: true
+  public-network:

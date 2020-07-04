@@ -1,0 +1,19 @@
+server:
+  port: 8082
+spring:
+  profiles:    active: dev
+  application:
+    name: bill---
+spring:
+  profiles: dev
+  data:
+    mongodb: 
+      host: localhost:27102
+      database: bill
+---
+spring:
+  profiles: prod
+  data:
+    mongodb: 
+      host: mongodb-bill:27017
+      database: bill

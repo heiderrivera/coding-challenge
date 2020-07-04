@@ -1,0 +1,21 @@
+server:
+  port: 8083
+spring:
+  profiles:
+    active: dev
+  application:
+    name: logistic
+---
+spring:
+  profiles: dev
+  data:
+    mongodb: 
+      host: localhost:27103
+      database: logistic
+---
+spring:
+  profiles: prod
+  data:
+    mongodb: 
+      host: mongodb-logistic:27017
+      database: logistic
